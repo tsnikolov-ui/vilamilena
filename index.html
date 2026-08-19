@@ -692,6 +692,7 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
 .cal-past{color:#c4bcab}
 .cal-busy{color:#a49a86;text-decoration:line-through;
   background:repeating-linear-gradient(-45deg,var(--sand-2),var(--sand-2) 3px,#e2d9c0 3px,#e2d9c0 6px)}
+.cal-mute{color:#c4bcab}
 .cal-free{cursor:pointer}
 .cal-free:hover{border-color:var(--teal)}
 .cal-ci,.cal-co{background:var(--gold);color:var(--forest);font-weight:800}
@@ -714,6 +715,61 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
 .cal-tip::after{content:"";position:absolute;top:100%;left:var(--ax,50%);transform:translateX(-50%);
   border:6px solid transparent;border-top-color:var(--forest)}
 .cal-tip.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--forest)}
+/* ---- REVIEWS: real feed + submit modal ---- */
+.rev-meta{display:block;font-size:.72rem;color:var(--stone);margin-top:4px;font-style:normal}
+.rev-reply{margin:10px 0 0;padding:9px 12px;background:var(--sand);border-left:3px solid var(--gold);border-radius:0 9px 9px 0;font-size:.8rem;color:var(--ink)}
+.rev-reply b{color:var(--gold-deep)}
+.rev-pills-lead{text-align:center;font-size:.78rem;color:var(--stone);margin:26px 0 10px}
+.rev-pills{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:8px}
+.rev-pill{font-size:.75rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px}
+.rev-pill b{color:var(--gold-deep);margin-right:4px}
+.rev-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
+.rev-modal[hidden]{display:none}
+.avail-sel[hidden]{display:none}
+.rev-modal{position:fixed;inset:0;z-index:90;background:rgba(16,28,22,.55);display:flex;align-items:center;justify-content:center;padding:18px}
+.rev-dialog{position:relative;background:#fff;border-radius:18px;max-width:480px;width:100%;max-height:92vh;overflow:auto;padding:clamp(20px,4vw,30px);box-shadow:0 30px 80px -30px rgba(16,28,22,.5)}
+.rev-note{font-size:.8rem;color:var(--stone);margin:6px 0 14px}
+.rev-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border:1px solid var(--line);background:var(--sand);border-radius:9px;font-size:19px;line-height:1;color:var(--forest);cursor:pointer}
+.rv-lab{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin:14px 0 6px}
+.rv-lab i{color:var(--stone);text-transform:none;letter-spacing:0;font-weight:500;font-style:normal}
+.rv-in{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;font:inherit;font-size:.9rem;color:var(--ink)}
+.rv-in:focus{outline:none;border-color:var(--teal)}
+.rate-row{display:flex;gap:6px;flex-wrap:wrap}
+.rate-b{width:33px;height:33px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:.84rem;color:var(--stone);cursor:pointer}
+.rate-b.on{background:var(--gold);border-color:var(--gold);color:var(--forest);font-weight:700}
+.rev-err{color:#a33;font-size:.8rem;margin:10px 0 0}
+.rev-thanks{font-size:.95rem;color:var(--ink);margin:8px 0 0}
+#revSend{margin-top:16px}
+/* ---- REVIEWS slider + CTA ---- */
+.rev-slider{position:relative;margin-top:10px}
+.rev-row{display:flex;align-items:flex-start;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 2px 16px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold) var(--sand-2)}
+.rev-row::-webkit-scrollbar{height:8px}
+.rev-row::-webkit-scrollbar-track{background:var(--sand-2);border-radius:99px}
+.rev-row::-webkit-scrollbar-thumb{background:var(--gold);border-radius:99px}
+.rev-row .rev{flex:0 0 302px;max-width:302px;margin:0;scroll-snap-align:start;display:flex;flex-direction:column}
+.rev-row .rev figcaption{margin-top:14px}
+.rev.long:not(.open) blockquote{display:-webkit-box;-webkit-line-clamp:10;-webkit-box-orient:vertical;overflow:hidden}
+.rev-more{align-self:flex-start;margin-top:8px;background:none;border:0;padding:0;font:inherit;
+  font-size:.78rem;font-weight:700;color:var(--teal);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rev-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--forest);font-size:23px;line-height:1;cursor:pointer;z-index:4;
+  box-shadow:0 12px 26px -14px rgba(16,28,22,.5);transition:border-color .2s,transform .2s}
+.rev-nav:hover{border-color:var(--gold)}
+.rev-nav.prev{left:-16px}
+.rev-nav.next{right:-16px}
+.rev-actions{flex-direction:column;gap:8px}
+.rev-invite{margin:10px 0 0;font-family:var(--f-disp);font-size:1.25rem;color:var(--forest)}
+.rev-cta{display:inline-flex;align-items:center;gap:11px;padding:15px 32px;border:0;border-radius:999px;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 100%);color:#fff;font:inherit;font-size:1rem;font-weight:700;
+  box-shadow:0 18px 38px -16px rgba(160,120,45,.75);transition:transform .22s,box-shadow .22s}
+.rev-cta:hover{transform:translateY(-2px);box-shadow:0 24px 46px -16px rgba(160,120,45,.85)}
+.rev-cta .star{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.92);color:var(--gold-deep);font-size:13px}
+@media(max-width:640px){
+  .rev-row .rev{flex-basis:82vw;max-width:82vw}
+  .rev-nav{display:none}
+}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LodgingBusiness", "name": "Къща за гости МИЛЕНА", "description": "Къща за гости в кв. Острец, Априлци. Отдава се цялата, за до 10+2 гости. Четири спални, три бани, басейн и барбекю в двора, две панорамни веранди.", "address": {"@type": "PostalAddress", "addressLocality": "Априлци", "addressRegion": "Ловешка област", "addressCountry": "BG", "streetAddress": "кв. Острец"}, "geo": {"@type": "GeoCoordinates", "latitude": 42.8192951, "longitude": 24.9548807}, "telephone": ["+359878177517", "+359878177520"], "email": "mpguesthouseresort@gmail.com", "priceRange": "250–300 EUR на вечер за цялата къща", "currenciesAccepted": "EUR", "paymentAccepted": "Банков превод, Карта", "numberOfRooms": 4, "petsAllowed": true, "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Басейн", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Барбекю", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Напълно оборудвана кухня", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Климатик", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Отопление", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Пералня", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Съдомиялна", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Безплатен паркинг", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Ограден двор", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Веранда", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Детски кът", "value": true}], "sameAs": ["https://www.facebook.com/profile.php?id=100089764795925", "https://www.booking.com/hotel/bg/kshcha-za-gosti-milena.bg.html"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": 9.9, "bestRating": 10, "worstRating": 1, "reviewCount": 18}, "review": [{"@type": "Review", "author": {"@type": "Person", "name": "Сюзан"}, "reviewRating": {"@type": "Rating", "ratingValue": 10, "bestRating": 10}, "reviewBody": "Чисто, уютно, със всички удобства, страхотни домакини."}, {"@type": "Review", "author": {"@type": "Person", "name": "Даниела"}, "reviewRating": {"@type": "Rating", "ratingValue": 10, "bestRating": 10}, "reviewBody": "Бяхме компания от 10 човека и всички сме единодушни, че това е най-хубавият престой в къща за гости, който сме имали!"}, {"@type": "Review", "author": {"@type": "Person", "name": "Iva"}, "reviewRating": {"@type": "Rating", "ratingValue": 10, "bestRating": 10}, "reviewBody": "Спокойна вила с невероятна гледка. Гостоприемството на собствениците, чистотата на къщата."}]}</script>
 </head>
@@ -763,7 +819,7 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
         <span class="badge-score">9.9</span>
         <div class="badge-info">
           <b>Фантастичен</b>
-          <span class="badge-sub">Booking.com · 18 отзива</span>
+          <span class="badge-sub">Booking.com · 19 отзива</span>
           <span style="color:var(--gold);font-weight:700;font-size:.82rem;margin-top:4px">Чистота 9.9 · Персонал 9.9</span>
         </div>
       </div>
@@ -1007,7 +1063,7 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
       <div class="cal-tip" id="calTip" hidden>Възможно е да имате късмет с тези дати, свържете се с нас и ще ги проверим допълнително за вас.</div>
       <div class="avail-legend">
         <span><i class="avail-dot free"></i>Свободно</span>
-        <span><i class="avail-dot busy"></i>Заето</span>
+        <span><i class="avail-dot busy"></i>Заето / недостъпно</span>
         <span><i class="avail-dot sel"></i>Вашият престой</span>
       </div>
       <div class="avail-sel" id="availSel" hidden>
@@ -1033,22 +1089,114 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
   <div class="wrap reveal">
     <span class="eyebrow" style="justify-content:center">Отзиви</span>
     <h2 class="testi-h">Какво казват гостите</h2>
-    <div class="rev-grid">
-      <figure class="rev">
+    <div class="rev-slider">
+      <button type="button" class="rev-nav prev" id="revPrev" aria-label="Предишни отзиви">&#8249;</button>
+      <div class="rev-row" id="revRow">
+      <figure class="rev long">
         <span class="rev-score">10</span>
-        <blockquote>Чисто, уютно, със всички удобства, страхотни домакини.</blockquote>
-        <figcaption>Сюзан · България</figcaption>
+        <blockquote>Вилата е много хубава, домакините са много усмихнати и приветливи! Допускат домашни любимци, като за едно кученце не ни таксуваха, това вече рядко се среща. Вилата е чудесна за компании, ние бяхме 9 души, не сме имали проблеми за шума! Изкарахме си прекрасно, препоръчвам!</blockquote>
+        <button type="button" class="rev-more">прочети още</button>
+        <figcaption>Кристина · България<span class="rev-meta">2 нощувки · август 2026</span></figcaption>
+      </figure>
+      <figure class="rev long">
+        <span class="rev-score">10</span>
+        <blockquote>Останахме изключително доволни от престоя си! Къщата е много уютна, чиста и комфортна. Басейнът беше отлично поддържан и кристално чист. Кухнята беше оборудвана с абсолютно всичко необходимо за готвене, така че нищо не ни липсваше. Домакините бяха невероятно мили, любезни и отзивчиви, винаги готови да помогнат при нужда. Благодарим за прекрасното отношение и страхотното преживяване! С удоволствие бихме посетили това място отново и го препоръчваме на всеки, който търси спокойствие, комфорт и гостоприемство.</blockquote>
+        <button type="button" class="rev-more">прочети още</button>
+        <figcaption>Елена · България<span class="rev-meta">2 нощувки · август 2026</span></figcaption>
       </figure>
       <figure class="rev">
         <span class="rev-score">10</span>
-        <blockquote>Бяхме компания от 10 човека и всички сме единодушни, че това е най-хубавият престой в къща за гости, който сме имали! Гледка, удобства, релакс, съчетани с топло отношение и мисъл към всеки детайл на домакините направиха престоя ни незабравим!</blockquote>
-        <figcaption>Даниела · България</figcaption>
+        <blockquote>Чисто, уютно, със всички удобства, страхотни домакини.</blockquote>
+        <p class="rev-reply"><b>Отговор от домакина:</b> „Благодарим!"</p>
+        <figcaption>Suzan · България<span class="rev-meta">2 нощувки · март 2026</span></figcaption>
+      </figure>
+      <figure class="rev long">
+        <span class="rev-score">10</span>
+        <blockquote>Бяхме компания от 10 човека и всички сме единодушни, че това е най-хубавият престой в Къща за гости, който сме имали! Гледка, удобства, релакс, съчетани с топло отношение и мисъл към всеки детайл на домакините направиха престоя ни незабравим! Благодарим ти, скъпа Милена!</blockquote>
+        <button type="button" class="rev-more">прочети още</button>
+        <p class="rev-reply"><b>Отговор от домакина:</b> „И аз, Ви благодаря! 😇"</p>
+        <figcaption>Даниела · България<span class="rev-meta">3 нощувки · март 2026</span></figcaption>
       </figure>
       <figure class="rev">
         <span class="rev-score">10</span>
         <blockquote>Спокойна вила с невероятна гледка. Гостоприемството на собствениците, чистотата на къщата. Имахме всичко необходимо за престоя си и определено ще я посетим отново през лятото!</blockquote>
-        <figcaption>Iva · Великобритания</figcaption>
+        <figcaption>Iva · Великобритания<span class="rev-meta">2 нощувки · май 2025</span></figcaption>
       </figure>
+      <figure class="rev">
+        <span class="rev-score">8</span>
+        <blockquote>Страхотна къща с хубав двор, имаше всичко необходимо.</blockquote>
+        <figcaption>Msj · България<span class="rev-meta">2 нощувки · април 2025</span></figcaption>
+      </figure>
+      <figure class="rev long">
+        <span class="rev-score">9</span>
+        <blockquote>Къщата е топла, чиста, на тихо и уединено място. Домакинята е любезна, не ни липсваше нищо. Има добре зареден магазин в центъра на квартала, на около 10 мин, а местата за разходка сред природата са много.</blockquote>
+        <button type="button" class="rev-more">прочети още</button>
+        <figcaption>Pavlina · България<span class="rev-meta">3 нощувки · февруари 2025</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Wonderful nature, region, hospitality. We are already thinking about our next stay there — every little detail was perfect.</blockquote>
+        <figcaption>Лидия · България<span class="rev-meta">3 нощувки · декември 2024</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Домакините невероятни.</blockquote>
+        <p class="rev-reply"><b>Отговор от домакина:</b> „Благодарим, пожелаваме си повече гости като Вас! :)"</p>
+        <figcaption>Tsvetelina · България<span class="rev-meta">2 нощувки · септември 2024</span></figcaption>
+      </figure>
+      <figure class="rev long">
+        <span class="rev-score">9</span>
+        <blockquote>Беше чисто и удобно, кухнята — оборудвана с всичко нужно. Басейнът чист, Wi-Fi без забележки, стаите и леглата удобни. Само през уикенда ресторантът наблизо е с жива музика до късно — въоръжете се с търпение :) Препоръчвам.</blockquote>
+        <button type="button" class="rev-more">прочети още</button>
+        <figcaption>Sonya · Полша<span class="rev-meta">4 нощувки · август 2024 · превод от полски</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Ivana · Ирландия<span class="rev-meta">2 нощувки · юли 2026</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Hristov · България<span class="rev-meta">2 нощувки · юни 2026</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Ivanrusev · България<span class="rev-meta">2 нощувки · ноември 2025</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Kristian · България<span class="rev-meta">3 нощувки · март 2025</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Svetlana · България<span class="rev-meta">3 нощувки · януари 2025</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Vencislava · България<span class="rev-meta">3 нощувки · септември 2024</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Dinko · България<span class="rev-meta">3 нощувки · юли 2024</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">10</span>
+        <blockquote>Фантастичен престой.</blockquote>
+        <figcaption>Julien · България<span class="rev-meta">4 нощувки · юли 2024</span></figcaption>
+      </figure>
+      <figure class="rev">
+        <span class="rev-score">9</span>
+        <blockquote>Превъзходен престой.</blockquote>
+        <figcaption>Петя · България<span class="rev-meta">2 нощувки · април 2024</span></figcaption>
+      </figure>
+      </div>
+      <button type="button" class="rev-nav next" id="revNext" aria-label="Още отзиви">&#8250;</button>
     </div>
 
     <div class="scorepanel">
@@ -1061,15 +1209,53 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
       </div>
       <div class="score-cats">
         <div class="cat"><span>Персонал</span><b>9.9</b><i style="--v:99%"></i></div>
-        <div class="cat"><span>Удобства</span><b>9.8</b><i style="--v:98%"></i></div>
+        <div class="cat"><span>Удобства</span><b>9.5</b><i style="--v:95%"></i></div>
         <div class="cat"><span>Чистота</span><b>9.9</b><i style="--v:99%"></i></div>
-        <div class="cat"><span>Комфорт</span><b>9.8</b><i style="--v:98%"></i></div>
+        <div class="cat"><span>Комфорт</span><b>9.9</b><i style="--v:99%"></i></div>
         <div class="cat"><span>Цена/качество</span><b>9.9</b><i style="--v:99%"></i></div>
         <div class="cat"><span>Разположение</span><b>9.8</b><i style="--v:98%"></i></div>
       </div>
     </div>
 
-    <a href="https://www.booking.com/hotel/bg/kshcha-za-gosti-milena.bg.html" target="_blank" rel="noopener" class="btn btn-outline">Виж профила в Booking.com</a>
+    <div class="rev-actions">
+      <p class="rev-invite">Гостували ли сте в къщата?</p>
+      <button type="button" class="rev-cta" id="revOpen"><span class="star">★</span>Оставете отзив</button>
+    </div>
+
+    <div class="rev-modal" id="revModal" hidden>
+      <div class="rev-dialog">
+        <button type="button" class="rev-x" id="revClose" aria-label="Затвори">&times;</button>
+        <h3>Оставете отзив</h3>
+        <p class="rev-note">Отзивът се публикува на сайта след кратък преглед от домакините.</p>
+        <div id="revForm">
+          <label class="rv-lab" for="rvName">Вашето име</label>
+          <input class="rv-in" id="rvName" type="text" maxlength="60" autocomplete="name">
+          <label class="rv-lab">Оценка</label>
+          <div class="rate-row">
+            <button type="button" class="rate-b" data-v="1">1</button>
+            <button type="button" class="rate-b" data-v="2">2</button>
+            <button type="button" class="rate-b" data-v="3">3</button>
+            <button type="button" class="rate-b" data-v="4">4</button>
+            <button type="button" class="rate-b" data-v="5">5</button>
+            <button type="button" class="rate-b" data-v="6">6</button>
+            <button type="button" class="rate-b" data-v="7">7</button>
+            <button type="button" class="rate-b" data-v="8">8</button>
+            <button type="button" class="rate-b" data-v="9">9</button>
+            <button type="button" class="rate-b" data-v="10">10</button>
+          </div>
+          <label class="rv-lab" for="rvStay">Кога гостувахте? <i>(по избор)</i></label>
+          <input class="rv-in" id="rvStay" type="text" placeholder="напр. август 2026" maxlength="40">
+          <label class="rv-lab" for="rvBody">Вашият отзив <i>(по избор)</i></label>
+          <textarea class="rv-in" id="rvBody" rows="5" maxlength="1200" placeholder="Разкажете как мина престоят ви…"></textarea>
+          <input id="rvSite" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <p class="rev-err" id="revErr" hidden></p>
+          <button type="button" class="btn btn-teal" id="revSend">Изпрати отзив</button>
+        </div>
+        <div id="revDone" hidden>
+          <p class="rev-thanks">Благодарим от сърце! Отзивът ви ще се появи на сайта, след като домакините го прегледат.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1333,13 +1519,25 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
   function nights(a, b){ var n=0; for (var d=a; d<b; d=addDays(d,1)) n++; return n; }
   function pretty(s){ var p = s.split('-'); return (+p[2]) + ' ' + MONTHS_S[p[1]-1]; }
 
+  var MIN_NIGHTS = 2; // както в ценовата секция: минимален престой 2 нощувки
+  function arrivalOk(s){
+    return s >= today && rangeFree(s, addDays(s, MIN_NIGHTS));
+  }
+
   function monthHtml(y, m){
     var days = new Date(y, m+1, 0).getDate(), lead = (new Date(y, m, 1).getDay() + 6) % 7, cells = '';
     for (var i=0;i<lead;i++) cells += '<span class="cal-cell cal-blank"></span>';
     for (var d=1; d<=days; d++){
       var ds = fmt(new Date(y, m, d)), cls = ['cal-cell'], click = false;
+      var picking = !!(ci && !co);
       if (ds < today) cls.push('cal-past');
-      else if (isBusy(ds)) cls.push('cal-busy');
+      else if (picking){
+        var okCo = ds > ci && nights(ci, ds) >= MIN_NIGHTS && rangeFree(ci, ds);
+        if (okCo || (arrivalOk(ds) && ds !== ci)) { cls.push('cal-free'); click = true; }
+        else if (isBusy(ds)) cls.push('cal-busy');
+        else cls.push('cal-mute');
+      }
+      else if (isBusy(ds) || !arrivalOk(ds)) cls.push('cal-busy');
       else { cls.push('cal-free'); click = true; }
       if (ci && ds === ci) cls.push('cal-ci');
       if (co && ds === co) cls.push('cal-co');
@@ -1368,7 +1566,7 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
       if (fFrom) fFrom.value = ci;
       if (fTo) fTo.value = co;
     } else if (ci){
-      selText.textContent = 'Настаняване ' + pretty(ci) + ' — изберете дата на напускане';
+      selText.textContent = 'Настаняване ' + pretty(ci) + ' — изберете напускане (мин. ' + MIN_NIGHTS + ' нощувки)';
       selBox.hidden = false;
       if (fFrom) fFrom.value = ci;
       if (fTo) fTo.value = '';
@@ -1382,8 +1580,9 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
     var c = e.target.closest('[data-d]'); if (!c) return;
     var d = c.getAttribute('data-d');
     if (!ci || (ci && co)) { ci = d; co = null; }
-    else if (d > ci && rangeFree(ci, d)) { co = d; }
-    else { ci = d; co = null; }
+    else if (d > ci && nights(ci, d) >= MIN_NIGHTS && rangeFree(ci, d)) { co = d; }
+    else if (arrivalOk(d)) { ci = d; co = null; }
+    else { ci = null; co = null; }
     syncSel(); render();
   });
 
@@ -1427,6 +1626,91 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
         '<p class="avail-note">Не успяхме да заредим заетостта в момента — изпратете запитване и ще потвърдим свободните дати.</p>');
     })
     .then(function(){ loaded = true; render(); });
+})();
+
+/* отзиви от сайта: показване на одобрените + форма за нов */
+(function(){
+  var REVIEWS_URL = 'https://olyckzazqukwfjhdbcno.supabase.co/functions/v1/villa-reviews';
+  var grid = document.getElementById('revRow');
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  if (grid) fetch(REVIEWS_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      ((j && j.reviews) || []).slice(0, 12).forEach(function(rv){
+        var f = document.createElement('figure');
+        var bodyTxt = String(rv.body || '').trim();
+        var isLong = bodyTxt.length > 200;
+        f.className = 'rev' + (isLong ? ' long' : '');
+        f.innerHTML = '<span class="rev-score">' + esc(rv.rating) + '</span>' +
+          '<blockquote>' + (bodyTxt ? esc(bodyTxt) : 'Оценка без коментар.') + '</blockquote>' +
+          (isLong ? '<button type="button" class="rev-more">прочети още</button>' : '') +
+          '<figcaption>' + esc(rv.name) + '<span class="rev-meta">' +
+          (rv.stay_month ? esc(rv.stay_month) + ' · ' : '') + 'отзив от сайта</span></figcaption>';
+        grid.appendChild(f);
+      });
+    })
+    .catch(function(){});
+
+  var prevB = document.getElementById('revPrev'),
+      nextB = document.getElementById('revNext');
+  function slide(dir){
+    if (grid) grid.scrollBy({ left: dir * Math.max(320, grid.clientWidth * 0.85), behavior: 'smooth' });
+  }
+  if (prevB) prevB.addEventListener('click', function(){ slide(-1); });
+  if (nextB) nextB.addEventListener('click', function(){ slide(1); });
+
+  if (grid) grid.addEventListener('click', function(e){
+    var b = e.target.closest('.rev-more'); if (!b) return;
+    var card = b.closest('.rev');
+    card.classList.toggle('open');
+    b.textContent = card.classList.contains('open') ? 'по-малко' : 'прочети още';
+  });
+
+  var modal = document.getElementById('revModal'); if (!modal) return;
+  var openB = document.getElementById('revOpen'),
+      closeB = document.getElementById('revClose'),
+      formB = document.getElementById('revForm'),
+      done = document.getElementById('revDone'),
+      err = document.getElementById('revErr'),
+      send = document.getElementById('revSend'),
+      rating = 10,
+      stars = modal.querySelectorAll('.rate-b');
+
+  function paint(){
+    for (var i = 0; i < stars.length; i++)
+      stars[i].classList.toggle('on', +stars[i].getAttribute('data-v') <= rating);
+  }
+  for (var i = 0; i < stars.length; i++)
+    stars[i].addEventListener('click', function(){ rating = +this.getAttribute('data-v'); paint(); });
+  paint();
+
+  function show(x){ modal.hidden = !x; document.body.style.overflow = x ? 'hidden' : ''; }
+  openB.addEventListener('click', function(){ show(true); });
+  closeB.addEventListener('click', function(){ show(false); });
+  modal.addEventListener('click', function(e){ if (e.target === modal) show(false); });
+
+  send.addEventListener('click', function(){
+    err.hidden = true;
+    var name = document.getElementById('rvName').value.trim(),
+        body = document.getElementById('rvBody').value.trim(),
+        stay = document.getElementById('rvStay').value.trim(),
+        hp = document.getElementById('rvSite').value;
+    if (name.length < 2){ err.textContent = 'Моля, въведете името си.'; err.hidden = false; return; }
+    send.disabled = true; send.textContent = 'Изпращане…';
+    fetch(REVIEWS_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name: name, body: body, stay_month: stay, rating: rating, website: hp })
+    }).then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(){ formB.hidden = true; done.hidden = false; })
+      .catch(function(){
+        err.textContent = 'Нещо се обърка — опитайте пак или ни пишете директно.';
+        err.hidden = false; send.disabled = false; send.textContent = 'Изпрати отзив';
+      });
+  });
 })();
 </script>
 </body>
