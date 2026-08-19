@@ -1226,7 +1226,7 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
       <div class="rev-dialog">
         <button type="button" class="rev-x" id="revClose" aria-label="Затвори">&times;</button>
         <h3>Оставете отзив</h3>
-        <p class="rev-note">Отзивът се публикува на сайта след кратък преглед от домакините.</p>
+        <p class="rev-note">Отзивът се публикува на сайта веднага.</p>
         <div id="revForm">
           <label class="rv-lab" for="rvName">Вашето име</label>
           <input class="rv-in" id="rvName" type="text" maxlength="60" autocomplete="name">
@@ -1252,7 +1252,7 @@ h1,h2,h3{font-family:var(--f-disp);font-weight:600;line-height:1.04;letter-spaci
           <button type="button" class="btn btn-teal" id="revSend">Изпрати отзив</button>
         </div>
         <div id="revDone" hidden>
-          <p class="rev-thanks">Благодарим от сърце! Отзивът ви ще се появи на сайта, след като домакините го прегледат.</p>
+          <p class="rev-thanks">Благодарим от сърце! Отзивът ви вече е публикуван на сайта.</p>
         </div>
       </div>
     </div>
@@ -1636,21 +1636,24 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
   function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
+  function addCard(rv){
+    if (!grid) return;
+    var f = document.createElement('figure');
+    var bodyTxt = String(rv.body || '').trim();
+    var isLong = bodyTxt.length > 200;
+    f.className = 'rev' + (isLong ? ' long' : '');
+    f.innerHTML = '<span class="rev-score">' + esc(rv.rating) + '</span>' +
+      '<blockquote>' + (bodyTxt ? esc(bodyTxt) : 'Оценка без коментар.') + '</blockquote>' +
+      (isLong ? '<button type="button" class="rev-more">прочети още</button>' : '') +
+      '<figcaption>' + esc(rv.name) + '<span class="rev-meta">' +
+      (rv.stay_month ? esc(rv.stay_month) + ' · ' : '') + 'отзив от сайта</span></figcaption>';
+    grid.appendChild(f);
+  }
+
   if (grid) fetch(REVIEWS_URL)
     .then(function(r){ return r.json(); })
     .then(function(j){
-      ((j && j.reviews) || []).slice(0, 12).forEach(function(rv){
-        var f = document.createElement('figure');
-        var bodyTxt = String(rv.body || '').trim();
-        var isLong = bodyTxt.length > 200;
-        f.className = 'rev' + (isLong ? ' long' : '');
-        f.innerHTML = '<span class="rev-score">' + esc(rv.rating) + '</span>' +
-          '<blockquote>' + (bodyTxt ? esc(bodyTxt) : 'Оценка без коментар.') + '</blockquote>' +
-          (isLong ? '<button type="button" class="rev-more">прочети още</button>' : '') +
-          '<figcaption>' + esc(rv.name) + '<span class="rev-meta">' +
-          (rv.stay_month ? esc(rv.stay_month) + ' · ' : '') + 'отзив от сайта</span></figcaption>';
-        grid.appendChild(f);
-      });
+      ((j && j.reviews) || []).slice(0, 12).forEach(addCard);
     })
     .catch(function(){});
 
@@ -1705,7 +1708,10 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name: name, body: body, stay_month: stay, rating: rating, website: hp })
     }).then(function(r){ if (!r.ok) throw 0; return r.json(); })
-      .then(function(){ formB.hidden = true; done.hidden = false; })
+      .then(function(){
+        formB.hidden = true; done.hidden = false;
+        addCard({ name: name, rating: rating, body: body, stay_month: stay });
+      })
       .catch(function(){
         err.textContent = 'Нещо се обърка — опитайте пак или ни пишете директно.';
         err.hidden = false; send.disabled = false; send.textContent = 'Изпрати отзив';
